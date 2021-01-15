@@ -78,7 +78,7 @@ let UI = new function()
             let $thisOptgroup = $("<optgroup>", {label : previousOptGroupLabel});
 
 
-            for (let i = 0; i < Library.Races.length; i++) 
+            for (let i = 0; i < Library.Races.length; i++)
             {
                 if (Library.Races[i].Unofficial != undefined && previousOptGroupLabel == "Official")
                 {
@@ -93,10 +93,10 @@ let UI = new function()
 
         }
         else
-            for (let i = 0; i < Library.Races.length; i++) 
+            for (let i = 0; i < Library.Races.length; i++)
                 $('#Race').append($('<option>', {value:Library.Races[i].ID, text:Library.Races[i].Name}));
 
-        for (let i = 0; i < Library.AttributeCost.length; i++) 
+        for (let i = 0; i < Library.AttributeCost.length; i++)
         {
             $('#DexPts').append($('<option>', {value:Library.AttributeCost[i].Cost, text:Library.AttributeCost[i].Modifier + " (" + Library.AttributeCost[i].Cost + " pts)"}));
             $('#StrPts').append($('<option>', {value:Library.AttributeCost[i].Cost, text:Library.AttributeCost[i].Modifier + " (" + Library.AttributeCost[i].Cost + " pts)"}));
@@ -106,7 +106,7 @@ let UI = new function()
             $('#ChaPts').append($('<option>', {value:Library.AttributeCost[i].Cost, text:Library.AttributeCost[i].Modifier + " (" + Library.AttributeCost[i].Cost + " pts)"}));
         }
 
-        for (let i = 0; i <= Character.Options.MaxAttributeIncrease; i++) 
+        for (let i = 0; i <= Character.Options.MaxAttributeIncrease; i++)
         {
             $('#DexInc').append($('<option>', {value:i, text:i}));
             $('#StrInc').append($('<option>', {value:i, text:i}));
@@ -130,7 +130,7 @@ let UI = new function()
         $('#MystArmorModWrapper'            ).html(UI.BuildNumbersSelect(-20, 100, 0,  "MystArmorMod",                "situationInput situationSelect"));
 
         $('#SituationKarmaWrapper'          ).html(UI.BuildNumbersSelect(-5,   100, 0, "SituationKarma",              "situationNumber"));
-        
+
         $('#TargetNumberWrapper'            ).html(UI.BuildNumbersSelect(1,   100, 6,  "TargetNumber",                "situationNumber"));
         $('#RolledNumberWrapper'            ).html(UI.BuildNumbersSelect(0,   100, 6,  "RolledNumber",                "situationNumber"));
         $('#HitSuccessNumberWrapper'        ).html(UI.BuildNumbersSelect(0,   15,  0,  "HitSuccessNumber",            "situationNumber"));
@@ -155,7 +155,7 @@ let UI = new function()
      };
 
     this.Redraw = function()
-    {   
+    {
         let t0 = performance.now();
 
         CharacterManager.ResetBuffer();        let t1 = performance.now();
@@ -272,7 +272,7 @@ let UI = new function()
         this.PushLP();
 
         $("#Disciplines").html("");
-        for (let i = 0; i < Character.Disciplines.length; i++) 
+        for (let i = 0; i < Character.Disciplines.length; i++)
         {
 
             $("#Disciplines").append(UI.BuildDisciplineLine(i));
@@ -350,27 +350,27 @@ let UI = new function()
         if (Character.PortraitURL == undefined)
             Character.PortraitURL = "./img/portraits/Empty.jpg";
 
-        UI.imageExists(Character.PortraitURL, function(exists) 
+        UI.imageExists(Character.PortraitURL, function(exists)
         {
             if (exists)
                 $("#Portrait").attr('src', Character.PortraitURL);
-            else 
-            {  
+            else
+            {
                 $("#Portrait").attr('src', "./img/portraits/Empty.jpg");
                 console.log("'" + Character.PortraitURL + "' appears to be an invalid image url )o:");
             }
         });
     }
 
-    this.imageExists = function(url, callback) 
+    this.imageExists = function(url, callback)
     {
         let img = new Image(); //$("<img>");
 
-        $(img).on("load", function() 
+        $(img).on("load", function()
         {
-            if (img.width > 0) 
-                callback(true); 
-            else 
+            if (img.width > 0)
+                callback(true);
+            else
                 callback(false);
         });
 
@@ -378,7 +378,7 @@ let UI = new function()
 
         img.src = url;
     }
-        
+
     this.PushLP = function()
     {
         $("#LpCurrent").val(CharacterManager.GetRemainingLegendPoints());
@@ -388,12 +388,12 @@ let UI = new function()
     this.PushAttributes = function()
     {
         let attAbbrevs = ["Dex", "Str", "Tou", "Per", "Wil", "Cha"];
-        let attObjs = CharacterManager.GetAttributes(); 
+        let attObjs = CharacterManager.GetAttributes();
         let race = Library.GetRace(Character.Race);
         let attBonuses = CharacterManager.GetAttributeBonuses();
 
         let attPtsRmdr = parseInt(Character.Options.Attributepoints);
-        
+
         for (let i=0; i<6; i++)
         {
 
@@ -420,32 +420,32 @@ let UI = new function()
     {
         switch (attributeAbbreviation)
         {
-            case "Dex": 
+            case "Dex":
                 $("#DexVal").html (CharacterManager.GetDex());
                 $("#DexStep").html(CharacterManager.GetDexStep());
                 $("#DexDice").html(Library.GetDice(CharacterManager.GetDexStep()));
                 break;
-            case "Str": 
+            case "Str":
                 $("#StrVal").html (CharacterManager.GetStr());
                 $("#StrStep").html(CharacterManager.GetStrStep());
                 $("#StrDice").html(Library.GetDice(CharacterManager.GetStrStep()));
                 break;
-            case "Tou": 
+            case "Tou":
                 $("#TouVal").html (CharacterManager.GetTou());
                 $("#TouStep").html(CharacterManager.GetTouStep());
                 $("#TouDice").html(Library.GetDice(CharacterManager.GetTouStep()));
                 break;
-            case "Per": 
+            case "Per":
                 $("#PerVal").html (CharacterManager.GetPer());
                 $("#PerStep").html(CharacterManager.GetPerStep());
                 $("#PerDice").html(Library.GetDice(CharacterManager.GetPerStep()));
                 break;
-            case "Wil": 
+            case "Wil":
                 $("#WilVal").html (CharacterManager.GetWil());
                 $("#WilStep").html(CharacterManager.GetWilStep());
                 $("#WilDice").html(Library.GetDice(CharacterManager.GetWilStep()));
                 break;
-            case "Cha": 
+            case "Cha":
                 $("#ChaVal").html (CharacterManager.GetCha());
                 $("#ChaStep").html(CharacterManager.GetChaStep());
                 $("#ChaDice").html(Library.GetDice(CharacterManager.GetChaStep()));
@@ -477,7 +477,7 @@ let UI = new function()
 
     this.PushDerived = function()
     {
-        // find shield in use: 
+        // find shield in use:
         let phString = "", myString = "", iniString = "", shield;
         for (let i = 0; i < Character.Equipment.length; i++) {
             if(Character.Equipment[i].Type == "Shield")
@@ -503,12 +503,12 @@ let UI = new function()
 
         if (baseIni == ModifiedIni)
             $("#ModifiedIni").hide();
-        else 
+        else
             $("#ModifiedIni").show();
 
         $("#Ini").html(baseIni + " / " + Library.GetDice(baseIni));
         $("#ArmoredIni").html((ModifiedIni + " / " + Library.GetDice(ModifiedIni)));
-        // Perhaps (omg) even Ini boost talents?  
+        // Perhaps (omg) even Ini boost talents?
 
         if (Character.Disciplines.length > 0 && Character.Disciplines[0].ID != "Empty")
         {
@@ -518,7 +518,7 @@ let UI = new function()
         else
             $("#KarmaPointsLine").hide();
 
-        if (Character.Questor != undefined && Character.Questor.devotionPoints != undefined && CharacterManager.GetDevotionPointsMax() != 0) 
+        if (Character.Questor != undefined && Character.Questor.devotionPoints != undefined && CharacterManager.GetDevotionPointsMax() != 0)
         {
             $("#DevotionPoints").html(Character.Questor.devotionPoints + " / " + CharacterManager.GetDevotionPointsMax() + " (" + CharacterManager.GetDevotionDiceType() + ")");
             $("#DevotionPointsLine").show();
@@ -551,8 +551,8 @@ let UI = new function()
 
         $("#curDmg").html(Character.Damage + " / " + Character.Wounds)
 
-        $("#HealthTable tr").removeClass("shaded"); 
-        $("#HealthTable tr:visible:even").addClass("shaded"); 
+        $("#HealthTable tr").removeClass("shaded");
+        $("#HealthTable tr:visible:even").addClass("shaded");
     };
 
     this.PushTalents = function()
@@ -561,7 +561,8 @@ let UI = new function()
         {
             let $discTbody = $("<tbody>");
             let $othrTbody = $("<tbody>");
-    
+            let $othrTfoot = $("<tfoot>"); // only need footer for othrT at the moment
+
             // Header
             let $hline = $("<tr>", {"id" : "DTalentTBody"});
             $hline.append($("<th>", {"html" : "Talent Name"}));
@@ -575,16 +576,16 @@ let UI = new function()
             $hline.append($("<th>", {"html" : "Bonus"}));
             $hline.append($("<th>", {"html" : "Step"}));
             $hline.append($("<th>", {"html" : "Dice"}));
-    
+
             $discTbody.append($hline);
             $othrTbody.append($hline.clone());
-    
-            for (let thisTalentIndex = 0; thisTalentIndex < Character.Talents.length; thisTalentIndex++) 
+
+            for (let thisTalentIndex = 0; thisTalentIndex < Character.Talents.length; thisTalentIndex++)
             {
                 let libTalent = Library.GetTalent(Character.Talents[thisTalentIndex].ID);
 
                 let $line =  $("<tr>", {"id" : "Talent_Line"  + thisTalentIndex});
-    
+
                 if (Character.Talents[thisTalentIndex].Type == "Optional")
                 {
                     let $TalentSelect = UI.BuildTalentSelect(thisTalentIndex, Character.Talents[thisTalentIndex].ID, Character.Talents[thisTalentIndex].DisciplineId, Character.Talents[thisTalentIndex].Circle);
@@ -597,36 +598,36 @@ let UI = new function()
                     if (Character.Talents[thisTalentIndex].Type == "Versatility")
                     {
                         let $td = $("<td>", {"id" : "TalentName"   + thisTalentIndex, "style" : "white-space: nowrap;"});
-    
-                        let $TalentSelect = UI.BuildVersatilityTalentSelect(thisTalentIndex); 
-    
+
+                        let $TalentSelect = UI.BuildVersatilityTalentSelect(thisTalentIndex);
+
                         $TalentSelect.val(Character.Talents[thisTalentIndex].ID);
                         $td.append($TalentSelect);
-    
+
                         let $tierSelect = $("<select>", { "id" : "VersatilityTierSelect" + thisTalentIndex, "class" : "hideInPlay talentTierSelect", "style": "text-align:left;"});
                         $tierSelect.append($('<option>', {value:"1", text:"Novice"}));
                         $tierSelect.append($('<option>', {value:"2", text:"Journeyman"}));
                         $tierSelect.append($('<option>', {value:"3", text:"Warden"}));
                         $tierSelect.append($('<option>', {value:"4", text:"Master"}));
                         $tierSelect.val(Character.Talents[thisTalentIndex].VersatilityTier);
-    
+
                         $td.append($tierSelect);
-    
+
                         $line.append($td);
                     }
                     else
                         if (Character.Talents[thisTalentIndex].Type == "PathGrantedTalent")
                         {
                             let $td = $("<td>", {"id" : "TalentName"   + thisTalentIndex, "style" : "white-space: nowrap;"});
-        
-                            let $TalentSelect = UI.BuildPathTalentSelect(Character.Talents[thisTalentIndex].PathID, Character.Talents[thisTalentIndex].PathRank, thisTalentIndex); 
+
+                            let $TalentSelect = UI.BuildPathTalentSelect(Character.Talents[thisTalentIndex].PathID, Character.Talents[thisTalentIndex].PathRank, thisTalentIndex);
                             $td.append($TalentSelect);
-       
+
                             $line.append($td);
                         }
                         else
                             $line.append($("<td>", {"id" : "TalentName"   + thisTalentIndex, "html"  : (libTalent == undefined ? "Empty" : libTalent.Name)}));
-    
+
                 $line.append($("<td>", {"id" : "TalentSource" + thisTalentIndex, "html" : Character.Talents[thisTalentIndex].Source, "class": "hideInPlay"}));
                 $line.append($("<td>", {"id" : "TalentPage"   + thisTalentIndex, "html" : (libTalent == undefined ? "-" : libTalent.Reference), "class": "talentSlim"}));
                 $line.append($("<td>", {"id" : "TalentAction" + thisTalentIndex, "html" : (libTalent == undefined ? "-" : libTalent.Action), "class": "talentMedium"}));
@@ -637,34 +638,34 @@ let UI = new function()
                 {
                     if (Character.Talents[thisTalentIndex].Type == "Free")
                     {
-                        for (let i = 0; i < Character.Disciplines.length; i++) 
+                        for (let i = 0; i < Character.Disciplines.length; i++)
                             if(Character.Talents[thisTalentIndex].DisciplineId.includes(Character.Disciplines[i].ID) && parseInt(Character.Disciplines[i].Circle) > rank)
                                 rank = parseInt(Character.Disciplines[i].Circle);
                     }
                     else
                         rank = parseInt(Character.Talents[thisTalentIndex].Rank);
-    
+
                     $line.append($("<td>", {"id" : "TalentFreeRank" + thisTalentIndex,   "html" : "-", "class": "talentSlim hideInPlay" }));
                     $line.append($("<td>", {"id" : "TalentRank" + thisTalentIndex, "html" : "("  + rank + ")", "class": "lockInPlay talentSlim"}));
                 }
                 else
                 {
                     rank = Character.Talents[thisTalentIndex].Rank;
-    
+
                     let $FreeRankCell = $("<td>", {"class": "talentSlim hideInPlay"});
                     let $RankCell     = $("<td>", {"class": "talentSlim"});
-    
+
                     if(Character.Talents[thisTalentIndex].TalentPointsUseable == "True")
                         $FreeRankCell.append(UI.BuildNumbersSelect(0, 3, Character.Talents[thisTalentIndex].Freerank, "TalentFreeRank" + thisTalentIndex, "TalentFreeRankInput lockInPlay"));
                     else
                         $FreeRankCell.html("&nbsp;");
-    
+
                     $line.append($FreeRankCell);
-                    
+
                     $RankCell.append(UI.BuildNumbersSelect(0, 15, rank, "TalentRank" + thisTalentIndex, "TalentRankInput lockInPlay"));
                     $line.append($RankCell);
                 }
-    
+
                 let thisTalentStep, thisAttribute = "", thisTalentBonus = 0;
                 rank = parseInt(rank);
                 if (libTalent != undefined)
@@ -680,7 +681,7 @@ let UI = new function()
                     {
                         thisTalentStep = 0;
                         let stepSplit = libTalent.Step.toLowerCase().split('+');
-                        for (let j = 0; j < stepSplit.length; j++) 
+                        for (let j = 0; j < stepSplit.length; j++)
                         {
                             switch (stepSplit[j])
                             {
@@ -738,20 +739,20 @@ let UI = new function()
                     if (!isNaN(thisTalentStep))
                         thisTalentStep += thisTalentBonus;
                 }
-    
+
                 Character.Talents[thisTalentIndex].Step = thisTalentStep;
                 $line.append($("<td>", {"id" : "TalentAttribute" + thisTalentIndex, "html" : (thisAttribute == "" ? "-" : thisAttribute), "class": "talentMedium"}));
                 $line.append($("<td>", {"id" : "TalentBonus" + thisTalentIndex, "html" : (thisTalentBonus != 0 ? thisTalentBonus : ""), "class": "talentSlim"}));
                 $line.append($("<td>", {"id" : "TalentStep" + thisTalentIndex, "html" : thisTalentStep, "class": "talentSlim"}));
-    
-                let theseDice; 
+
+                let theseDice;
                 if (isNaN(thisTalentStep) || thisTalentStep == 0)
                     theseDice = "-";
                 else
                     theseDice = Library.GetDice(thisTalentStep+"");
-    
+
                 $line.append($("<td>", {"id" : "TalentDice" + thisTalentIndex, "html" : theseDice, "class": "talentMedium"}));
-    
+
                 if (Character.Talents[thisTalentIndex].Type == "Discipline")
                     $discTbody.append($line);
                 else
@@ -759,14 +760,18 @@ let UI = new function()
             }
             let $TalentPointsRemainingLine = $("<tr>", {"class" : "hideInPlay"});
             $TalentPointsRemainingLine.append($("<td>", {"colspan": "100%", "style" : "text-align: right;", "html" : "Remaining Talent Points: <span id='TalentPointsRemaining'>" + CharacterManager.GetRemainingTalentPoints() + "</span>"}));
-            $othrTbody.append($TalentPointsRemainingLine);
-    
+            $othrTfoot.append($TalentPointsRemainingLine);
+
             $("#DiscTalentTable > tbody").remove("");
             $("#DiscTalentTable").append($discTbody);
             $("#othrTalentTable > tbody").remove("");
             $("#othrTalentTable").append($othrTbody);
+            $("#othrTalentTable > tfoot").remove("");
+            $("#othrTalentTable").append($othrTfoot);
             $("#Talents").show();
-        }    
+
+            makeSortable("Talents");
+        }
         else
             $("#Talents").hide();
     };
@@ -809,8 +814,8 @@ let UI = new function()
 
     this.UpdateTalentSteps = function(attributeAbbreviation)
     {
-        for (let thisTalentIndex = 0; thisTalentIndex < Character.Talents.length; thisTalentIndex++) 
-            if(Character.Talents[thisTalentIndex].ID != "Empty") 
+        for (let thisTalentIndex = 0; thisTalentIndex < Character.Talents.length; thisTalentIndex++)
+            if(Character.Talents[thisTalentIndex].ID != "Empty")
                 if(Library.GetTalent(Character.Talents[thisTalentIndex].ID).Attribute.toLowerCase() == attributeAbbreviation.toLowerCase() || (attributeAbbreviation.toLowerCase() == "dex" && Library.GetTalent(Character.Talents[thisTalentIndex].ID).Attribute.toLowerCase() == "ini"))
                     UI.UpdateTalentStepDice(thisTalentIndex);
     };
@@ -834,7 +839,7 @@ let UI = new function()
         let thisTalentStep = CharacterManager.GetTalentStep(thisTalentIndex);
         $("#TalentStep" + thisTalentIndex).html(thisTalentStep);
 
-        let theseDice; 
+        let theseDice;
         if (isNaN(thisTalentStep) || thisTalentStep == 0)
             theseDice = "-";
         else
@@ -868,7 +873,7 @@ let UI = new function()
 
             $Tbody.append($hline);
 
-            for (let thisKnackIndex = 0; thisKnackIndex < Character.Knacks.length; thisKnackIndex++) 
+            for (let thisKnackIndex = 0; thisKnackIndex < Character.Knacks.length; thisKnackIndex++)
             {
                 let $line;
                 let extraLine = "";
@@ -895,13 +900,13 @@ let UI = new function()
                     $line.append($("<td>", {"id" : "KnackDice"       + thisKnackIndex, "html" : "-"}));
                 }
                 else
-                {            
+                {
                     let libKnack = Library.GetKnack(Character.Knacks[thisKnackIndex].ID);
                     if (libKnack == undefined)
                         throw "UI.PushKnacks(): Undefined Knack" + Character.Knacks[thisKnackIndex].ID;
 
                     let thisTalent, thisRank = 0;
-    
+
                     let chaTalent = Character.Talents.find(o => o.ID === libKnack.Talent || o.ID.includes(libKnack.Talent));
 
                     if(chaTalent == undefined)
@@ -910,10 +915,10 @@ let UI = new function()
 
                     let libTalent = Library.GetTalent(chaTalent.ID);
                     thisRank  = chaTalent.Rank;
-    
+
                     if(libTalent == undefined || thisRank == undefined)
                         console.log ("PushKnacks: Talent not found '" + libKnack.Talent + "'");
-    
+
                     $line =  $("<tr>", {"id" : "Knack_Line"   + thisKnackIndex, "class" : "Knack" + libKnack.Attribute + (thisKnackIndex % 2 == 1 ? " shaded" : "")});
                     $line.append($("<td>", {"id" : "KillKnack"    + thisKnackIndex, "html"  : "✕", "class": "killKnack hideInPlay"}));
 
@@ -931,7 +936,7 @@ let UI = new function()
 
                     // Build Requirements string
                     let requirements = "";
-                    for (let thisRequirement = 0; thisRequirement < libKnack.Requirements.length; thisRequirement++) 
+                    for (let thisRequirement = 0; thisRequirement < libKnack.Requirements.length; thisRequirement++)
                     {
                         if (thisRequirement != 0)
                             requirements += ", "
@@ -1010,7 +1015,7 @@ let UI = new function()
 
                     $line.append($("<td>", {"id" : "KnackAction"     + thisKnackIndex, "html" : (libKnack.Action != undefined ? libKnack.Action : "&nbsp;")}));
                     $line.append($("<td>", {"id" : "KnackStrain"     + thisKnackIndex, "html" : (libKnack.Strain != undefined ? libKnack.Strain : "&nbsp;"), "class": "talentSlim"}));
-    
+
                     let thisStep, thisAttribute = "&nbsp;";
                     if (libKnack.Step == undefined || libKnack.Step == "-" || libKnack.Step == "N/A")
                         thisStep = "-";
@@ -1018,7 +1023,7 @@ let UI = new function()
                     {
                         thisStep = 0, thisAttribute = "";
                         let stepSplit = libKnack.Step.toLowerCase().split('+');
-                        for (let j = 0; j < stepSplit.length; j++) 
+                        for (let j = 0; j < stepSplit.length; j++)
                         {
                             switch (stepSplit[j])
                             {
@@ -1074,15 +1079,15 @@ let UI = new function()
                             }
                         }
                     }
-    
+
                     Character.Knacks[thisKnackIndex].Step = thisStep;
-    
+
                     $line.append($("<td>", {"id" : "KnackAttribute"  + thisKnackIndex, "html" : thisAttribute}));
                     $line.append($("<td>", {"id" : "KnackStep"       + thisKnackIndex, "html" : thisStep}));
                     $line.append($("<td>", {"id" : "KnackDice"       + thisKnackIndex, "html" : (!isNaN(thisStep) ? Library.GetDice(thisStep) : "-")}));
                 }
                 $Tbody.append($line);
-                if (extraLine != "") 
+                if (extraLine != "")
                 {
                     let $ExtraLine = $("<tr>", {"id" : "Knack_Line" + thisKnackIndex + "Extras", "class" : "knackAdd hideInPlay" + (thisKnackIndex % 2 == 1 ? " shaded" : "") });
                     $ExtraLine.append($("<td>",{"html" : "&nbsp;"}));
@@ -1110,16 +1115,16 @@ let UI = new function()
         }
         else
             $("#Knacks").hide();
-    };   
+    };
 
     this.UpdateKnackSteps = function()
     {
         if(Character.Knacks != undefined)
-            for (let thisKnackIndex = 0; thisKnackIndex < Character.Knacks.length; thisKnackIndex++) 
-                if(Character.Knacks[thisKnackIndex].ID != "Empty") 
+            for (let thisKnackIndex = 0; thisKnackIndex < Character.Knacks.length; thisKnackIndex++)
+                if(Character.Knacks[thisKnackIndex].ID != "Empty")
                         UI.UpdateKnackStepDice(thisKnackIndex);
     };
-    
+
     this.UpdateKnackStepDice = function(thisKnackIndex)
     {
         if(Character.Knacks != undefined && Character.Knacks[thisKnackIndex].ID != "Empty")
@@ -1140,7 +1145,7 @@ let UI = new function()
             {
                 thisStep = 0;
                 let stepSplit = libKnack.Step.toLowerCase().split('+');
-                for (let j = 0; j < stepSplit.length; j++) 
+                for (let j = 0; j < stepSplit.length; j++)
                 {
                     switch (stepSplit[j])
                     {
@@ -1267,7 +1272,7 @@ let UI = new function()
             $line.append($("<td>", {"html" : Character.Questor.Rank}));
         else
             $line.append($("<td>", {"html" : UI.BuildNumbersSelect(0, Character.Questor.Rank, Character.Questor.Ranks[thisDoctrineRank].devotionRank, "DevotionRank" + thisDoctrineRank, "devotionRankInput lockInPlay")}));
-                    
+
         let thisStep, thisAttribute = "-";
         if (libDevotion.Step == undefined || libDevotion.Step == "-" || libDevotion.Step == "N/A")
             thisStep = "-";
@@ -1275,7 +1280,7 @@ let UI = new function()
         {
             thisStep = 0;
             let stepSplit = libDevotion.Step.toLowerCase().split('+');
-            for (let j = 0; j < stepSplit.length; j++) 
+            for (let j = 0; j < stepSplit.length; j++)
             {
                 switch (stepSplit[j])
                 {
@@ -1358,7 +1363,7 @@ let UI = new function()
         $("#DevotionStrain"    + thisDoctrineRank).html(libDevotion.Strain);
         $("#DevotionDevRq"     + thisDoctrineRank).html(libDevotion.DevRq);
         $("#DevotionRank"      + thisDoctrineRank).val(Character.Questor.Ranks[thisDoctrineRank].devotionRank);
-                    
+
         this.UpdateDevotionStepDice(thisDoctrineRank);
     }
 
@@ -1384,7 +1389,7 @@ let UI = new function()
         {
             thisStep = 0;
             let stepSplit = libDevotion.Step.toLowerCase().split('+');
-            for (let j = 0; j < stepSplit.length; j++) 
+            for (let j = 0; j < stepSplit.length; j++)
             {
                 switch (stepSplit[j])
                 {
@@ -1437,7 +1442,7 @@ let UI = new function()
         $("#DevotionStep"      + thisDoctrineRank).html(thisStep);
         $("#DevotionDice"      + thisDoctrineRank).html(!isNaN(thisStep) ? Library.GetDice(thisStep) : "-");
     }
-    
+
     this.BuildDevotionAbilityLine = function(thisDoctrineRank)
     {
         if (Character.Questor.Ranks[thisDoctrineRank].devotionAbility == undefined)
@@ -1456,6 +1461,7 @@ let UI = new function()
     this.PushSkills = function()
     {
         let $Tbody = $("<tbody>");
+        let $Tfoot = $("<tfoot>");
 
         // Header
         let $hline = $("<tr>");
@@ -1479,7 +1485,7 @@ let UI = new function()
         $CategorySelect.append($('<option>', {value : "Knowledge", text:"Knowledge"}));
         $CategorySelect.append($('<option>', {value : "Artisan",   text:"Artisan"}));
 
-        for (let i = 0; i < Character.Skills.length; i++) 
+        for (let i = 0; i < Character.Skills.length; i++)
         {
             if (Character.Skills[i].ID == "Empty" && !["General","Artisan","Knowledge"].includes(Character.Skills[i].Category))
             {
@@ -1553,11 +1559,11 @@ let UI = new function()
                  || (Character.Options.SkillFreeRanksLimit == "Journeyman" && (libSkill.Cost == "Novice" || libSkill.Cost == "Journeyman"))
                  || (Character.Options.SkillFreeRanksLimit == "Warden"     && (libSkill.Cost == "Novice" || libSkill.Cost == "Journeyman" || libSkill.Cost == "Warden")))
                     $FreeRankCell.append(UI.BuildNumbersSelect(0, 3, Character.Skills[i].Freerank, "SkillFreeRank" + i, "skillFreeRank hideInPlay"));
-                else 
+                else
                     $FreeRankCell.html("&nbsp;");
 
                 $line.append($FreeRankCell);
-                
+
                 $RankCell.append(UI.BuildNumbersSelect(0, 10, Character.Skills[i].Rank, "SkillRank" + i, "skillRank"));
                 $line.append($RankCell);
 
@@ -1568,7 +1574,7 @@ let UI = new function()
                 {
                     thisStep = 0;
                     let stepSplit = libSkill.Step.toLowerCase().split('+');
-                    for (let j = 0; j < stepSplit.length; j++) 
+                    for (let j = 0; j < stepSplit.length; j++)
                     {
                         switch (stepSplit[j])
                         {
@@ -1623,7 +1629,7 @@ let UI = new function()
                 $line.append($("<td>", {"id" : "SkillStep"      + i, "html"  : thisStep}));
 
 
-                let theseDice; 
+                let theseDice;
                 if (isNaN(thisStep))
                     theseDice = "-";
                 else
@@ -1643,10 +1649,14 @@ let UI = new function()
 
         let $SkillPointsRemainingLine = $("<tr>", {"class" : "hideInPlay"});
         $SkillPointsRemainingLine.append($("<td>", {"colspan": "100%", "style" : "text-align: right;", "html" : "Remaining Skill Points: <span id='SkillPointsRemaining'>" + CharacterManager.GetRemainingSkillPoints() + "</span>"}));
-        $Tbody.append($SkillPointsRemainingLine);
+        $Tfoot.append($SkillPointsRemainingLine);
 
         $("#SkillTable > tbody").remove("");
         $("#SkillTable").append($Tbody);
+        $("#SkillTable > tfoot").remove("");
+        $("#SkillTable").append($Tfoot);
+
+        makeSortable("Skills");
 
         $(".ArtisanSkillInput").autocomplete({lookup: Library.ArtisanSkills.map(o => o.Name), minChars : 0, onSelect : UI.PullSkillInput});
         $(".KnowledgeSkillInput").autocomplete({lookup: Library.KnowledgeSkills.map(o => o.Name), minChars : 0, onSelect : UI.PullSkillInput});
@@ -1681,20 +1691,20 @@ let UI = new function()
 
     this.UpdateSkillSteps = function(attributeAbbreviation)
     {
-        for (let thisSkillIndex = 0; thisSkillIndex < Character.Skills.length; thisSkillIndex++) 
+        for (let thisSkillIndex = 0; thisSkillIndex < Character.Skills.length; thisSkillIndex++)
         {
-            if(Character.Skills[thisSkillIndex].ID != "Empty") 
+            if(Character.Skills[thisSkillIndex].ID != "Empty")
                 if(Library.GetSkill(Character.Skills[thisSkillIndex].ID).Attribute.toLowerCase() == attributeAbbreviation.toLowerCase() || (attributeAbbreviation.toLowerCase() == "dex" && Library.GetSkill(Character.Skills[thisSkillIndex].ID).Attribute.toLowerCase() == "ini"))
                     UI.UpdateSkillStepDice(thisSkillIndex);
         }
     };
 
-    this.UpdateSkillStepDice = function(thisSkillIndex) 
+    this.UpdateSkillStepDice = function(thisSkillIndex)
     {
         if (isNaN(thisSkillIndex) || thisSkillIndex < 0 || thisSkillIndex > Character.Skills.length)
         {
             console.log("UI.UpdateSkillStepDice(): Input invalid or out of range: " + thisSkillIndex);
-            return; 
+            return;
         }
 
         let libSkill = Library.GetSkill(Character.Skills[thisSkillIndex].ID);
@@ -1708,7 +1718,7 @@ let UI = new function()
         {
             thisStep = 0;
             let stepSplit = libSkill.Step.toLowerCase().split('+');
-            for (let j = 0; j < stepSplit.length; j++) 
+            for (let j = 0; j < stepSplit.length; j++)
             {
                 switch (stepSplit[j])
                 {
@@ -1748,7 +1758,7 @@ let UI = new function()
             Character.Skills[thisSkillIndex].Step = thisStep;
         }
 
-        let theseDice; 
+        let theseDice;
         if (isNaN(thisStep))
             theseDice = "-";
         else
@@ -1766,7 +1776,7 @@ let UI = new function()
             return;
         }
 
-         
+
         let $Tbody = $("<tbody>");
 
         // Header
@@ -1779,9 +1789,9 @@ let UI = new function()
 
         $Tbody.append($hline);
 
-        let $line = ""; 
+        let $line = "";
 
-        for (let thisSpellIndex = 0; thisSpellIndex < Character.Spells.length; thisSpellIndex++) 
+        for (let thisSpellIndex = 0; thisSpellIndex < Character.Spells.length; thisSpellIndex++)
         {
             if (Character.Spells[thisSpellIndex].ID == "Empty")
             {
@@ -1836,7 +1846,7 @@ let UI = new function()
         $("#SpellTable > tbody").remove("");
         $("#SpellTable").append($Tbody);
         $("#Spells").show();
-    };    
+    };
 
     this.PushEquipment = function()
     {
@@ -1858,7 +1868,7 @@ let UI = new function()
 
         let typeSelect = UI.BuildEquipmentTypeSelect();
 
-        for (let thisEqIndex = 0; thisEqIndex < Character.Equipment.length; thisEqIndex++) 
+        for (let thisEqIndex = 0; thisEqIndex < Character.Equipment.length; thisEqIndex++)
         {
             let chaEq = Character.Equipment[thisEqIndex];
             let libEq = Library.GetEquipment(chaEq.ID);
@@ -1897,7 +1907,7 @@ let UI = new function()
             $line.append($selectTd);
 
             $line.append($("<td>", {"html"  : "<input type='Text' id='EqName" + thisEqIndex + "',  class='eqName lockInPlay' value='" + (chaEq.Name != undefined ? chaEq.Name : "") + "' />"}));
-            
+
             $line.append($("<td>", {"html"  : "<input id='EqCount" + thisEqIndex + "' type='Number' class='eqCount lockInPlay' value='" + chaEq.Count + "' />" }));
             $line.append($("<td>", {"id" : "EqPage"   + thisEqIndex, "html"  : (libEq.Reference == undefined ? "-" : libEq.Reference)}));
             $line.append($("<td>", {"id" : "EqValue"  + thisEqIndex, "html"  :  libEq.Cost}));
@@ -1907,8 +1917,8 @@ let UI = new function()
             let thisMisc = "";
 
             for (let key in libEq)
-            { 
-                if (libEq.hasOwnProperty(key)) 
+            {
+                if (libEq.hasOwnProperty(key))
                 {
                     switch(key)
                     {
@@ -1929,13 +1939,13 @@ let UI = new function()
 
                             let $rankSelect = UI.BuildNumbersSelect(0, libEq.Ranks.length, thisRank, "EqRank" + thisEqIndex, "eqRank");
                             thisMisc +="<br />Rank: " + $rankSelect[0].outerHTML + ": ";
-                            let rankDescription = ""; 
+                            let rankDescription = "";
                             let libRank = libEq.Ranks.find(o => o.Rank === thisRank+"");
                             if (libRank != undefined)
                             {
                                 if (libRank.Modifiers != undefined)
-                                    for (let RankModifierKey in libRank.Modifiers) 
-                                        if (libRank.Modifiers.hasOwnProperty(RankModifierKey)) 
+                                    for (let RankModifierKey in libRank.Modifiers)
+                                        if (libRank.Modifiers.hasOwnProperty(RankModifierKey))
                                         {
                                             if (rankDescription != "")
                                                 rankDescription += ", ";
@@ -1943,7 +1953,7 @@ let UI = new function()
                                             {
                                                 case "Talents":
                                                     rankDescription += "Talents: ";
-                                                    for (let RankTalentKey in libRank.Modifiers.Talents) 
+                                                    for (let RankTalentKey in libRank.Modifiers.Talents)
                                                     {
                                                         if (RankTalentKey != 0)
                                                             rankDescription += ", ";
@@ -1953,9 +1963,9 @@ let UI = new function()
                                                             rankDescription += Library.GetTalent(libRank.Modifiers.Talents[RankTalentKey].ID).Name + " +" + libRank.Modifiers.Talents[RankTalentKey].Modifier;
                                                     }
                                                     break;
-                                                case "Skills": 
+                                                case "Skills":
                                                     rankDescription += "Skills: ";
-                                                    for (let RankSkillKey in libRank.Modifiers.Skills) 
+                                                    for (let RankSkillKey in libRank.Modifiers.Skills)
                                                     {
                                                         if (RankSkillKey != 0)
                                                             rankDescription += ", ";
@@ -1965,7 +1975,7 @@ let UI = new function()
                                                 default:
                                                     rankDescription += Library.GetFullName(RankModifierKey) + ": " + libRank.Modifiers[RankModifierKey];
                                             }
-                                            
+
                                         }
                                 if (libRank.BonusTalent != undefined)
                                         {
@@ -2108,8 +2118,8 @@ let UI = new function()
                             thisMisc += "Modifiers: ";
                             let modifierString = "";
                             for (let modifier in libEq.Modifiers)
-                            { 
-                                if (libEq.Modifiers.hasOwnProperty(modifier)) 
+                            {
+                                if (libEq.Modifiers.hasOwnProperty(modifier))
                                 {
                                     if (modifierString != "")
                                         modifierString += ", ";
@@ -2142,13 +2152,13 @@ let UI = new function()
                             if (thisMisc != "")
                                 thisMisc += ", ";
                             thisMisc += key + ": " + libEq[key];
-                            break; 
+                            break;
                         default:
                             if (thisMisc != "")
                                 thisMisc += ", ";
                             thisMisc += key + ": " + libEq[key];
                             console.log("unknown Item property:" + libEq.ID + ": " + key + ": " + libEq[key])
-                            break; 
+                            break;
                     }
                 }
             }
@@ -2165,8 +2175,8 @@ let UI = new function()
                 let myForge = (!isNaN(chaEq.MyForge) ? chaEq.MyForge : 0);
 
                 thisMisc += "<br />Forged : (";
-                thisMisc += UI.BuildNumbersSelect(0, 15, phForge, "EqPhForge" + thisEqIndex, "eqPhForge")[0].outerHTML + "/"; 
-                thisMisc += UI.BuildNumbersSelect(0, 15, myForge, "EqMyForge" + thisEqIndex, "eqMyForge")[0].outerHTML + ")"; 
+                thisMisc += UI.BuildNumbersSelect(0, 15, phForge, "EqPhForge" + thisEqIndex, "eqPhForge")[0].outerHTML + "/";
+                thisMisc += UI.BuildNumbersSelect(0, 15, myForge, "EqMyForge" + thisEqIndex, "eqMyForge")[0].outerHTML + ")";
             }
 
             if (thisMisc != "")
@@ -2196,7 +2206,7 @@ let UI = new function()
         if (isNaN(thisEqIndex) || thisEqIndex < 0 || thisEqIndex > Character.Equipment.length)
         {
             console.log("UI.UpdateDamageStep(): Input invalid or out of range: " + thisEqIndex);
-            return; 
+            return;
         }
         let chaEq = Character.Equipment[thisEqIndex];
         let libEq = Library.GetEquipment(chaEq.ID);
@@ -2204,7 +2214,7 @@ let UI = new function()
         if (libEq.DmgStep == undefined)
         {
             console.log("UI.UpdateDamageStep(): The item: " + libEq.Name + " doesn't appear to have a damage step. Why am I trying to update it then?");
-            return; 
+            return;
         }
 
         let dmgStep = parseInt(libEq.DmgStep) + (!isNaN(chaEq.Forged) ? parseInt(chaEq.Forged) : 0);
@@ -2233,7 +2243,7 @@ let UI = new function()
         if (isNaN(thisEqIndex) || thisEqIndex < 0 || thisEqIndex > Character.Equipment.length)
         {
             console.log("UI.UpdateArmorValues(): Input invalid or out of range: " + thisEqIndex);
-            return; 
+            return;
         }
 
         let chaEq = Character.Equipment[thisEqIndex];
@@ -2241,7 +2251,7 @@ let UI = new function()
         if  (chaEq.ID == "Empty")
         {
             console.log("UI.UpdateArmorValues(): The selected item is unselected. How am I trying to update it's armor values again? " + thisEqIndex);
-            return; 
+            return;
         }
 
         let libEq = Library.GetEquipment(chaEq.ID);
@@ -2291,7 +2301,7 @@ let UI = new function()
         $Tbody.append($hline);
 
         if (Character.Magic != undefined)
-            for (let thisMagicIndex = 0; thisMagicIndex < Character.Magic.length; thisMagicIndex++) 
+            for (let thisMagicIndex = 0; thisMagicIndex < Character.Magic.length; thisMagicIndex++)
             {
                 let chaMagic = Character.Magic[thisMagicIndex];
                 let libMagic = Library.GetMagic(chaMagic.ID);
@@ -2319,7 +2329,7 @@ let UI = new function()
 
                 $line.append($("<td>", {"html"  : "<input type='Text' id='MagicTarget" + thisMagicIndex + "',  class='magicTarget lockInPlay' value='" + (chaMagic.Target != undefined ? chaMagic.Target : "") + "' />"}));
                 $line.append($("<td>", {"id" : "MagicPage"   + thisMagicIndex, "html"  : (libMagic.Reference == undefined ? "-" : libMagic.Reference), "style" : "white-space:nowrap;"}));
-    
+
                 let $effectTd = $("<td>");
 
                 if(libMagic.Damage != undefined)
@@ -2367,7 +2377,7 @@ let UI = new function()
                 }
                 if (libMagic.Threadable != undefined)
                 {
-                    for (let i = 0; i < parseInt(libMagic.Threadable); i++) 
+                    for (let i = 0; i < parseInt(libMagic.Threadable); i++)
                     {
                         let $ThreadTargetSelect = UI.BuildThreadTargetSelect(thisMagicIndex, libMagic.Threadable, i);
                         $effectTd.append($("<span>",{"html" : ($effectTd.html().length > 0 ? "<br/>" : "" )}));
@@ -2407,7 +2417,7 @@ let UI = new function()
 
         // Race
         if (Library.GetRace(Character.Race).Abilities != undefined)
-        {   
+        {
             let libRace = Library.GetRace(Character.Race);
             let $line =  $("<tr>");
             $line.append($("<td>", {"html" : libRace.Name}));
@@ -2416,9 +2426,9 @@ let UI = new function()
         }
 
         // Circle
-        for (let thisDiscipline = 0; thisDiscipline < Character.Disciplines.length; thisDiscipline++) 
-            if (Character.Disciplines[thisDiscipline].ID != "Empty") 
-                for (let thisCircle = 0; thisCircle < parseInt(Character.Disciplines[thisDiscipline].Circle); thisCircle++) 
+        for (let thisDiscipline = 0; thisDiscipline < Character.Disciplines.length; thisDiscipline++)
+            if (Character.Disciplines[thisDiscipline].ID != "Empty")
+                for (let thisCircle = 0; thisCircle < parseInt(Character.Disciplines[thisDiscipline].Circle); thisCircle++)
                 {
                     let thisLibraryDiscipline = Library.GetDiscipline(Character.Disciplines[thisDiscipline].ID);
                     let thisLibraryCircle = thisLibraryDiscipline.Circles[thisCircle];
@@ -2428,19 +2438,19 @@ let UI = new function()
                     if (thisLibraryCircle.Ability != undefined)
                         builder += thisLibraryCircle.Ability;
                     if (thisLibraryCircle.Modifiers != undefined)
-                        for (let i = 0; i < Object.keys(thisLibraryCircle.Modifiers).length; i++) 
+                        for (let i = 0; i < Object.keys(thisLibraryCircle.Modifiers).length; i++)
                         {
                             if (builder != "")
                                 builder += ", ";
 
                             let key = Object.keys(thisLibraryCircle.Modifiers)[i];
                             let keyName = Library.GetFullName(key);
-        
+
                             builder += keyName + " " + thisLibraryCircle.Modifiers[key];
                         }
 
                     if (builder != "")
-                    {                    
+                    {
                         let $line =  $("<tr>");
                         $line.append($("<td>", {"html" : thisLibraryDiscipline.Name + " " + thisLibraryCircle.Circle}));
                         $line.append($("<td>", {"html" : builder}));
@@ -2449,10 +2459,10 @@ let UI = new function()
                 }
 
         // Paths
-        for (let i = 0; i < Character.Paths.length; i++) 
+        for (let i = 0; i < Character.Paths.length; i++)
         {
-            if (Character.Paths[i].ID != "Empty") 
-                for (let j = 1; j <= parseInt(Character.Paths[i].Rank); j++) 
+            if (Character.Paths[i].ID != "Empty")
+                for (let j = 1; j <= parseInt(Character.Paths[i].Rank); j++)
                 {
                     let thisRank = Library.GetPath(Character.Paths[i].ID).Ranks[j-1];
                     builder = "";
@@ -2463,7 +2473,7 @@ let UI = new function()
                         {
                             if (builder != "")
                                 builder += ", ";
-                            builder += Library.GetFullName(modifier) + " " + thisRank.Modifiers[modifier]; 
+                            builder += Library.GetFullName(modifier) + " " + thisRank.Modifiers[modifier];
                         }
                     }
                     if (builder != "")
@@ -2477,7 +2487,7 @@ let UI = new function()
         }
 
         // Questor
-        if (Character.Questor != undefined && Character.Questor.Doctrine != "Empty" && Character.Questor.Rank > 0) 
+        if (Character.Questor != undefined && Character.Questor.Doctrine != "Empty" && Character.Questor.Rank > 0)
         {
             let libRank = Library.GetDoctrine(Character.Questor.Doctrine).Ranks[Character.Questor.Rank-1];
             builder = "";
@@ -2488,7 +2498,7 @@ let UI = new function()
                 {
                     if (builder != "")
                         builder += ", ";
-                    builder += Library.GetFullName(modifier) + " " + libRank.Modifiers[modifier]; 
+                    builder += Library.GetFullName(modifier) + " " + libRank.Modifiers[modifier];
                 }
             }
             if (builder != "")
@@ -2510,7 +2520,7 @@ let UI = new function()
             {
                 if (builder != "")
                     builder += ", ";
-                builder += Library.GetFullName(modifier) + " +" + CombinedBonuses[modifier]; 
+                builder += Library.GetFullName(modifier) + " +" + CombinedBonuses[modifier];
             }
             if (builder != "")
             {
@@ -2529,10 +2539,10 @@ let UI = new function()
     {
         $("#MatrixCardsWrapper").html("");
 
-        let MatricesFound = false; 
+        let MatricesFound = false;
         // Look up the Matrices
-        for (let i = 0; i < Character.Talents.length; i++) 
-        {   
+        for (let i = 0; i < Character.Talents.length; i++)
+        {
             if (Character.Talents[i].ID != "Empty")
             {
 
@@ -2559,12 +2569,12 @@ let UI = new function()
         // Get Matrix rank
         let rank = 0;
         if (characterTalent.Type == "Free")
-        {    
-            for (let i = 0; i < Character.Disciplines.length; i++) 
+        {
+            for (let i = 0; i < Character.Disciplines.length; i++)
                 if(Character.Talents[index].DisciplineId.includes(Character.Disciplines[i].ID) && parseInt(Character.Disciplines[i].Circle) > rank)
                     rank = parseInt(Character.Disciplines[i].Circle);
         }
-        else 
+        else
             rank = parseInt(characterTalent.Rank);
 
         let $card = $("<div>", {id : "MatrixCard" + index, "class" : "MatrixCard"});
@@ -2572,10 +2582,10 @@ let UI = new function()
         $card.append($("<div>", {"class" : "MatrixCardRank",         "text" : "Source: " + characterTalent.Source + " " + characterTalent.Type + ", Rank: " + rank}));
 
         // Build Select statement
-        let $select = $("<select>", {"class" : "MatrixCardSelect", id : "MatrixCardSelect" + index}); 
+        let $select = $("<select>", {"class" : "MatrixCardSelect", id : "MatrixCardSelect" + index});
         $select.append($("<option>", {"value": "", "text": "(Empty)"}));
         for(let i = 0; i< Character.Spells.length; i++)
-        {   
+        {
             if (Character.Spells[i].ID != "Empty")
             {
                 let librarySpell = Library.GetSpell(Character.Spells[i].ID);
@@ -2598,16 +2608,3 @@ let UI = new function()
         $("#MatrixCardsWrapper").append($card);
     };
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
