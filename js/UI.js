@@ -1645,7 +1645,7 @@ let UI = new function()
         let $AddSkillTd = $("<td>", {"colspan" : "11", "Style" : "text-align: center;"});
         $AddSkillTd.append($("<div>",{"id" : "AddSkillButton", "class" : "AddButton", "html" : "+"}));
         $AddSkillLine.append($AddSkillTd);
-        $Tbody.append($AddSkillLine);
+        $Tfoot.append($AddSkillLine);
 
         let $SkillPointsRemainingLine = $("<tr>", {"class" : "hideInPlay"});
         $SkillPointsRemainingLine.append($("<td>", {"colspan": "100%", "style" : "text-align: right;", "html" : "Remaining Skill Points: <span id='SkillPointsRemaining'>" + CharacterManager.GetRemainingSkillPoints() + "</span>"}));
